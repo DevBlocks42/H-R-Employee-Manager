@@ -4,7 +4,7 @@ Application de gestion des employés basé sur le cours openclassroom https://op
 
 Dépôt original : https://github.com/OpenClassrooms-Student-Center/HR-Association
 
-
+Note : l'implémentation entre ce projet et celui de base peut différer sur certains points.
 
 ![alt text](logo.png "Title")
 
@@ -18,14 +18,21 @@ Dépôt original : https://github.com/OpenClassrooms-Student-Center/HR-Associati
 
 Le projet est construit en 2 parties sur le modèle API/Client.
 
-## API 
+## API REST
 
-Interface d'accès à la base de données H2, API basée sur le pattern MVC.
+Interface d'accès à la base de données H2, API REST basée sur le pattern MVC.
 
 ## Application web
 
 Utilise l'interface d'accès à la base de données pour récupérer les données à afficher. 
 Code organisé seon le principe du MVC.
+
+# Fonctionnalités de l'existant : 
+
+- Lister les employés
+- Modifier les informations des employés
+- Ajouter un employé
+- Supprimer un employé
 
 # Objectifs
 
@@ -33,7 +40,4 @@ Ce projet a pour objectif de faire évoluer l'application existante en lui ajout
 
 - Système d'authentification JWT à l'API (sécurité)
 - Hashage des mots de passes avant enregistrement en base de données (sécurité)
-
-
-
-
+- Application native Android (portabilité)
