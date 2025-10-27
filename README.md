@@ -14,14 +14,26 @@ Dépôt original : https://github.com/OpenClassrooms-Student-Center/HR-Associati
 - SpringBoot
 - Technologies web (Html/Css)
 
-## Architecture de l'application
+# Architecture de l'application
 
-# API 
+Le projet est construit en 2 parties sur le modèle API/Client.
+
+## API 
 
 Interface d'accès à la base de données H2, API basée sur le pattern MVC.
 
-# Application web
+## Application web
 
 Utilise l'interface d'accès à la base de données pour récupérer les données à afficher. 
 Code organisé seon le principe du MVC.
+
+# Objectifs
+
+Ce projet a pour objectif de faire évoluer l'application existante en lui ajoutant certaines fonctionnalités :
+
+- Système d'authentification JWT à l'API (sécurité)
+- Hashage des mots de passes avant enregistrement en base de données (sécurité)
+
+
+
 
