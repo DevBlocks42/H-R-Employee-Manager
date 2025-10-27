@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h2 id='title'>Ajout d'employé</h2>
+		<div id="employeeCreator">
+			<form id='employeeCreatorForm' th:method='POST' th:action="@{/saveEmployee}" th:object="${employee}">
+				<input type='hidden' th:field="*{id}">
+				<label for='firstName'>Prénom</label>
+				<input id='firstName' type='text' th:field="*{firstName}">
+				<label for='lastName'>Nom</label>
+				<input id='lastName' type='text' th:field="*{lastName}">
+				<label for='email'>Email</label>
+				<input id='email' type='email' th:field="*{mail}">
+				<label for='password'>Mot de passe</label>
+				<input id='password' type='password' th:field="*{password}">
+				<button type='submit'>Ajouter</button>
+			</form>
+		</div>
+	</body>
+	<style>
+		#employeeCreator {
+			width: 25%;
+			border: 3px solid black;
+			padding: auto;
+			margin: auto;
+			background-color: grey;
+		}
+		#employeeCreatorForm * {
+			display: block;
+			margin-top: 1%;
+			margin-bottom: auto;
+			margin: auto;
+		}
+		#employeeCreatorForm input,
+		#employeeCreatorForm button {
+			margin-top: 1%;
+			margin-bottom: 1%;
+		}
+		#employeeCreatorForm label {
+			text-align: center;
+			margin-top: 1%;
+		}
+		#title {
+			text-align: center;
+		}
+	</style>
+</html>

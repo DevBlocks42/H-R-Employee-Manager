@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h1>H&R Association Manager</h1>
+		<img id='logo' th:src="@{images/logo.png}">
+		<h2 id='title'>Liste des employés</h2>
+		<div id = 'employeeManager'>
+			<table>
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${employees.empty}">Aucun employé dans la base de données.</tr>
+					<tr th:each="employee: ${employees}">
+	                	<td><p th:text="${employee.firstName}"></p></td>
+	                	<td><p th:text="${employee.lastName}"></p></td>
+	                	<td><a id='deleteButton' th:href="@{/deleteEmployee/{id}(id=${employee.id})}">Supprimer</a></td>
+	                	<td><a id='editButton' th:href="@{/editEmployee/{id}(id=${employee.id})}">Éditer</a></td>
+	                </tr>
+				</tbody>
+			</table>
+			<div id='addEmployeeContainer'>
+				<a id='addEmployeeButton' th:href="@{/addEmployee}">Ajouter un employé</a>
+			</div>
+		</div>
+	</body>
+	<style>
+		body {
+			width: 100%;
+			height: 100%;
+		}
+		#addEmployeeContainer {
+			text-align: center;
+			margin-top: 1%;
+		}
+		#addEmployeeButton {
+			background-color: #009933;
+			color: white;
+		}
+		#editButton {
+			background-color: orange;
+			color: white;
+			text-decoration: none;
+		}
+		#deleteButton {
+			background-color: red;
+			color: white;
+			text-decoration: none;	
+		}
+		#employeeManager * {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#title {
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		table {
+			border: 3px solid black;
+			background-color: grey;
+		}
+		#logo {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		h1 {
+			text-align: center;
+		}	
+	</style>
+</html>
