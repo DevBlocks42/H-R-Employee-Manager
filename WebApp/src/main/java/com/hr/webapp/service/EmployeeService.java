@@ -1,5 +1,7 @@
 package com.hr.webapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class EmployeeService {
 	 * Récupère la liste des Employee
 	 * @return une liste d'Empoyee
 	 */
-	public Iterable<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return repository.getEmployees();
 	}
 	

@@ -1,7 +1,10 @@
 package com.hr.webapp.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,8 +14,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import com.hr.webapp.model.Employee;
 import com.hr.webapp.utils.PropertiesReader;
 
+import io.jsonwebtoken.lang.Arrays;
+
 @Component
-public class EmployeeRepository {
+public class EmployeeRepository extends BaseRepository {
 	@Autowired
 	private PropertiesReader props;
 	
@@ -20,19 +25,13 @@ public class EmployeeRepository {
 	
 	/**
 	 * Retourne la liste de tous les Employee
-	 * @return un Iterable d'objet Employee
+	 * @return une liste d'objet Employee
 	 */
-	public Iterable<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		String apiUrl = props.getApiUrl();
 		String endpoint = apiUrl + "/employees";
-		RestTemplate rest = new RestTemplate();
-		ResponseEntity<Iterable<Employee>> response = rest.exchange(
-				endpoint,
-				HttpMethod.GET,
-				null,
-				new ParameterizedTypeReference<Iterable<Employee>>() {}
-		);
-		return response.getBody();
+		ResponseEntity<Employee[]> response = get(endpoint, Employee[].class);
+		return Arrays.asList(response.getBody());
 		
 	}
 	/**
@@ -43,13 +42,7 @@ public class EmployeeRepository {
 	public Employee getEmployee(Long id) {
 		String apiUrl = props.getApiUrl();
 		String endpoint = apiUrl + "/employee/" + id;
-		RestTemplate rest = new RestTemplate();
-		ResponseEntity<Employee> response = rest.exchange(
-				endpoint,
-				HttpMethod.GET,
-				null,
-				Employee.class
-		);
+		ResponseEntity<Employee> response = get(endpoint, Employee.class);
 		return response.getBody();
 	}
 	
@@ -62,14 +55,7 @@ public class EmployeeRepository {
 	public Employee createEmployee(Employee employee) {
 		String apiUrl = props.getApiUrl();
 		String endpoint = apiUrl + "/employee";
-		RestTemplate rest = new RestTemplate();
-		HttpEntity<Employee> request = new HttpEntity<Employee>(employee);
-		ResponseEntity<Employee> response = rest.exchange(
-				endpoint,
-				HttpMethod.POST,
-				request,
-				Employee.class
-		);
+		ResponseEntity<Employee> response = post(endpoint, employee, Employee.class);
 		return response.getBody();
 	}
 	
@@ -84,27 +70,19 @@ public class EmployeeRepository {
 		String apiUrl = props.getApiUrl();
 		String endpoint = apiUrl + "/employee/" + id;
 		RestTemplate rest = new RestTemplate();
-		HttpEntity<Employee> request = new HttpEntity<Employee>(employee);
-		ResponseEntity<Employee> response = rest.exchange(
-				endpoint,
-				HttpMethod.PUT,
-				request,
-				Employee.class
-		);
+		ResponseEntity<Employee> response = put(endpoint, employee, Employee.class);
 		return response.getBody();
 	}
 	
 	/******************************** HTTP DELETE ********************************/
 	
+	/**
+	 * Supprime un Employee
+	 * @param id
+	 */
 	public void deleteEmployee(Long id) {
 		String apiUrl = props.getApiUrl();
 		String endpoint = apiUrl + "/employee/" + id;
-		RestTemplate rest = new RestTemplate();
-		ResponseEntity<Void> response = rest.exchange(
-				endpoint,
-				HttpMethod.DELETE,
-				null,
-				Void.class
-		);
+		delete(endpoint);
 	}
 }

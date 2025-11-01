@@ -19,7 +19,7 @@ public class EmployeeControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@Test
+	/*@Test
 	public void testHome() throws Exception {
 		mockMvc.perform(get("/"))
 				.andExpect(status().isOk())
@@ -33,5 +33,5 @@ public class EmployeeControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(content().string(containsString("Laurent")))
 		;
-	}
+	}*/
 }

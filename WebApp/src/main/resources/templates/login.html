@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h2 id='title'>Authentification</h2>
+		<p th:if="${message}" th:text="${message}" style="color: green;"></p>
+    	<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+		<div id="loginContainer">
+			<form id='loginForm' th:method='POST' th:action="@{/login}" th:object="${admin}">
+				<label for='username'>Nom d'utilisateur</label>
+				<input id='username' type='text' th:field="*{username}">
+				<label for='password'>Mot de passe</label>
+				<input id='password' type='password' th:field="*{password}">
+				<button type='submit'>Connexion</button>
+			</form>
+		</div>
+		
+	</body>
+</html>
