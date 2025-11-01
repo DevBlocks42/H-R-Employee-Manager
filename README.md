@@ -40,4 +40,4 @@ Ce projet a pour objectif de faire évoluer l'application existante en lui ajout
 
 - Système d'authentification admin (login/mot de passe) à cette application (sécurité)
 - Hashage des mots de passes avant enregistrement en base de données (sécurité)
-- Application native Android (portabilité)
+- Ajout de fonctionnalités de gestion (à définir)
