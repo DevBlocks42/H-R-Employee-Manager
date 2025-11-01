@@ -38,7 +38,6 @@ Code organisé seon le principe du MVC.
 
 Ce projet a pour objectif de faire évoluer l'application existante en lui ajoutant certaines fonctionnalités :
 
-- Système d'authentification JWT à l'API (sécurité)
 - Système d'authentification admin (login/mot de passe) à cette application (sécurité)
 - Hashage des mots de passes avant enregistrement en base de données (sécurité)
 - Application native Android (portabilité)
