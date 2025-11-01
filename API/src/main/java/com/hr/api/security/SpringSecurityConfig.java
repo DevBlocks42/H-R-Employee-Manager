@@ -31,6 +31,7 @@ public class SpringSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
         .csrf(csrf -> csrf.disable())
+        .headers(headers -> headers.frameOptions(frame -> frame.disable()))
         .cors(cors -> cors.configurationSource(request -> {
             var c = new org.springframework.web.cors.CorsConfiguration();
             c.setAllowedOrigins(List.of("http://localhost:8081"));
@@ -41,6 +42,8 @@ public class SpringSecurityConfig {
         }))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/auth/login").permitAll() 
+            //DANGER
+            .requestMatchers("/h2-console/**").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
