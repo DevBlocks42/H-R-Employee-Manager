@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
 		<title>H&R Association Manager</title>
 	</head>
 	<body>
@@ -30,52 +31,8 @@
 			</table>
 			<div id='addEmployeeContainer'>
 				<a id='addEmployeeButton' th:href="@{/addEmployee}">Ajouter un employé</a>
+				<a id='addEmployeeButton' th:href="@{/departments}">Gestionnaire de Services</a>
 			</div>
 		</div>
 	</body>
-	<style>
-		body {
-			width: 100%;
-			height: 100%;
-		}
-		#addEmployeeContainer {
-			text-align: center;
-			margin-top: 1%;
-		}
-		#addEmployeeButton {
-			background-color: #009933;
-			color: white;
-		}
-		#editButton {
-			background-color: orange;
-			color: white;
-			text-decoration: none;
-		}
-		#deleteButton {
-			background-color: red;
-			color: white;
-			text-decoration: none;	
-		}
-		#employeeManager * {
-			margin-left: auto;
-			margin-right: auto;
-		}
-		#title {
-			text-align: center;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		table {
-			border: 3px solid black;
-			background-color: grey;
-		}
-		#logo {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		h1 {
-			text-align: center;
-		}	
-	</style>
 </html>

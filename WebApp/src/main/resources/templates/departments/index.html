@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h1>H&R Association Manager - Services</h1>
+		<div id = 'departmentsTable'>
+			<table>
+				<thead>
+					<tr>
+						<th class='center'>ID</th>
+						<th class='center'>Nom</th>
+						<th class='center'>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${departments.empty}">Aucun service dans la base de données.</tr>
+						<tr th:each="department: ${departments}">
+		                	<td class='center'><p th:text="${department.id}"></p></td>
+		                	<td class='center'><p th:text="${department.name}"></p></td>
+		                	<td class='center'><p th:text="${department.description}"></p></td>
+		                	
+		             </tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
