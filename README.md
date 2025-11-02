@@ -6,7 +6,7 @@ Dépôt original : https://github.com/OpenClassrooms-Student-Center/HR-Associati
 
 Note : l'implémentation entre ce projet et celui de base peut différer sur certains points.
 
-![alt text](logo.png "Title")
+![alt text](logo.png "H&R Association")
 
 ## Technologies / Pile logicielle
 
@@ -41,3 +41,7 @@ Ce projet a pour objectif de faire évoluer l'application existante en lui ajout
 - Système d'authentification admin (login/mot de passe) à cette application (sécurité)
 - Hashage des mots de passes avant enregistrement en base de données (sécurité)
 - Ajout de fonctionnalités de gestion (à définir)
+
+# Modèle conceptuel de données
+
+![alt text](MCD.jpg "Title")
