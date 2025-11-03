@@ -14,6 +14,7 @@
 						<th class='center'>ID</th>
 						<th class='center'>Nom</th>
 						<th class='center'>Description</th>
+						<th class='center'>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,6 +23,8 @@
 		                	<td class='center'><p th:text="${department.id}"></p></td>
 		                	<td class='center'><p th:text="${department.name}"></p></td>
 		                	<td class='center'><p th:text="${department.description}"></p></td>
+		                	<td class='center'><a th:href="@{/department/{id}(id=${department.id})}">Éditer</a></td>
+		                	<td class='center'><a th:href="@{/deleteDepartment/{id}(id=${department.id})}">Supprimer</a></td>
 		                	
 		             </tr>
 				</tbody>

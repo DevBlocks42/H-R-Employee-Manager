@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hr.api.model.Department;
@@ -64,12 +65,13 @@ public class DepartmentController {
 	 * @return
 	 */
 	@PutMapping("/department/{id}")
-	public Department saveDepartment(@PathVariable("id") Long id, Department department) {
+	public Department saveDepartment(@PathVariable("id") Long id, @RequestBody Department department) {
 		Optional<Department> dbDepartment = service.getDepartment(id);
 		if(dbDepartment.isPresent()) {
-			if(!dbDepartment.get().getName().equals(department.getName())) {
+			department.setId(dbDepartment.get().getId());
+			if(department.getName() != null) {
 				dbDepartment.get().setName(department.getName());
-			} else if(!dbDepartment.get().getDescription().equals(department.getDescription())) {
+			} if(department.getDescription() != null) {
 				dbDepartment.get().setDescription(department.getDescription());
 			}
 		}

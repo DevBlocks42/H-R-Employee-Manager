@@ -98,3 +98,26 @@ h1 {
 #departmentManager {
 	text-align: center;
 }
+
+#formContainer {
+	width: 25%;
+	border: 3px solid black;
+	padding: auto;
+	margin: auto;
+	background-color: grey;
+}
+#form * {
+	display: block;
+	margin-top: 1%;
+	margin-bottom: auto;
+	margin: auto;	
+}
+
+#form input, #form button {
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+#form label {
+	text-align: center;
+	margin-top: 1%;
+}

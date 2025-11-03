@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h1>H&R Association Manager - Services</h1>
+		<div id = 'formContainer'>
+			<form id='form' th:method='POST' th:action="@{/department/add}" th:object="${department}">
+				<input type='hidden' th:field="*{id}">
+				<label for='name'>Nom</label>
+				<input id='name' type='text' th:field="*{name}">
+				<label for='description'>Description</label>
+				<input id='description' type='text' th:field="*{description}">
+				<button type='submit'>Ajouter</button>
+			</form>
+		</div>
+	</body>
+</html>

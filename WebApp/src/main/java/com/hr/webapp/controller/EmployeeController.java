@@ -20,17 +20,20 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
 	/**
 	 * Affiche la page d'accueil avec la liste des employés
 	 * @param model
 	 * @return String vue
 	 */
+	
 	@GetMapping("/")
 	public String home(Model model) {
 		Iterable<Employee> employees = employeeService.getEmployees();
 		model.addAttribute("employees", employees);
 		return "home";
 	}
+	
 	/**
 	 * Affiche le formulaire d'ajout d'employé
 	 * @param model
@@ -42,6 +45,7 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		return "addEmployee";
 	}
+	
 	/**
 	 * Affiche le formulaire d'édition d'employé
 	 * @param model
@@ -56,6 +60,7 @@ public class EmployeeController {
 		}
 		return "addEmployee";
 	}
+	
 	/**
 	 * Supprime l'employé via son id
 	 * @param id
@@ -66,6 +71,7 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return new ModelAndView("redirect:/");
 	}
+	
 	/**
 	 * Sauvegarde un employé existant ou en créer un nouveau
 	 * @param employee
