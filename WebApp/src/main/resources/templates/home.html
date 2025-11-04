@@ -16,6 +16,7 @@
 					<tr>
 						<th>Nom</th>
 						<th>Prénom</th>
+						<th>Service</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -24,6 +25,7 @@
 					<tr th:each="employee: ${employees}">
 	                	<td><p th:text="${employee.firstName}"></p></td>
 	                	<td><p th:text="${employee.lastName}"></p></td>
+	                	<td><p th:if="${employee.department}" th:text="${employee.department.name}"></p></td>
 	                	<td><a id='deleteButton' th:href="@{/deleteEmployee/{id}(id=${employee.id})}">Supprimer</a></td>
 	                	<td><a id='editButton' th:href="@{/editEmployee/{id}(id=${employee.id})}">Éditer</a></td>
 	                </tr>

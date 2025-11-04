@@ -26,16 +26,16 @@ CREATE TABLE departments(
    PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS employeeDepartment;
+/*DROP TABLE IF EXISTS employeeDepartment;*/
 
-CREATE TABLE employeeDepartment (
+/*CREATE TABLE employeeDepartment (
    employee_id INT,
    department_id INT,
    isLeading BOOLEAN,
    PRIMARY KEY(employee_id, department_id),
    FOREIGN KEY(employee_id) REFERENCES employees(id),
    FOREIGN KEY(department_id) REFERENCES departments(id)
-);
+);*/
 
 INSERT INTO admins (username, password_hash) VALUES
 	('admin', '$2a$10$dpBn4dpJCCluHV6I0k4Yb.PT4zmV1irgvCyjpPhDtWPf/yknwaMju');
@@ -47,3 +47,4 @@ INSERT INTO employees (first_name, last_name, mail, password) VALUES
   
  INSERT INTO departments (name, description) VALUES 
  	('Ressources Humaines', 'Service en charge de la gestion des ressources humaines de l''entreprise.');
+ 	
