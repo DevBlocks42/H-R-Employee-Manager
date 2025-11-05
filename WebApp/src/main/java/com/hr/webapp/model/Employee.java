@@ -11,5 +11,5 @@ public class Employee {
 	private String lastName;
 	private String mail;
 	private String password;
-	private Department department;
+	private Department department = new Department();
 }

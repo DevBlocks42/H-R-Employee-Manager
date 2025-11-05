@@ -1,6 +1,8 @@
 package com.hr.api.controller;
 
+import com.hr.api.model.Department;
 import com.hr.api.model.Employee;
+import com.hr.api.service.DepartmentService;
 import com.hr.api.service.EmployeeService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class EmployeeController {
     
     @Autowired
     private EmployeeService employeeService;
+    
+    @Autowired 
+    private DepartmentService departmentService;
     
     /******************************** HTTP GET ********************************/
     
@@ -47,6 +52,8 @@ public class EmployeeController {
      */
     @PostMapping("/employee")
     public Employee addEmployee(@RequestBody Employee employee) {
+    	Department department = departmentService.getDepartment((long) employee.getDepartment().getId()).get();
+    	employee.setDepartment(department);
         return employeeService.saveEmployee(employee);
     }
     
@@ -67,6 +74,7 @@ public class EmployeeController {
             String lastName = employee.getLastName();
             String mail = employee.getMail();
             String password = employee.getPassword();
+            Department department = departmentService.getDepartment((long) employee.getDepartment().getId()).get();
             if(firstName != null) {
                 currentEmployee.setFirstName(firstName);
             } if (lastName != null) {
@@ -75,6 +83,8 @@ public class EmployeeController {
                 currentEmployee.setMail(mail);
             } if (password != null) {
                 currentEmployee.setPassword(password);
+            } if(department != null) {
+            	currentEmployee.setDepartment(department);
             }
             employeeService.saveEmployee(currentEmployee);
             return currentEmployee;

@@ -18,6 +18,10 @@
 				<input id='email' type='email' th:field="*{mail}">
 				<label for='password'>Mot de passe</label>
 				<input id='password' type='password' th:field="*{password}">
+				<select id='department' th:field="*{department.id}">
+					<option value="0">Veuillez choisir un service</option>
+    				<option th:each="dpt : ${departments}" th:value="${dpt.id}" th:text="${dpt.name}"></option>
+				</select>
 				<button type='submit'>Ajouter</button>
 			</form>
 		</div>
