@@ -3,6 +3,10 @@ package com.hr.api.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,7 +89,14 @@ public class DepartmentController {
 	 * @param id
 	 */
 	@DeleteMapping("/department/{id}")
-	public void deleteDepartment(@PathVariable("id") Long id) {
-		service.deleteDepartment(id);
+	public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long id) {
+		try {
+			service.deleteDepartment(id);
+			return ResponseEntity.ok("Service supprimé avec succès.");
+		} catch (DataIntegrityViolationException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Erreur : le service est déjà rattaché à un ou plusieurs employé(s).");
+	    } catch(Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur interne : " + e.getMessage());
+	    }
 	}
 }
