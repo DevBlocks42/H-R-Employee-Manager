@@ -57,7 +57,7 @@ public class DepartmentController {
 	 * @param department
 	 * @return
 	 */
-	public Department createDepartment(Department department) {
+	public Department createDepartment(@RequestBody Department department) {
 		return service.saveDepartment(department);
 	}
 	
@@ -78,6 +78,8 @@ public class DepartmentController {
 			} if(department.getDescription() != null) {
 				dbDepartment.get().setDescription(department.getDescription());
 			}
+		} else {
+			return service.saveDepartment(department);
 		}
 		return service.saveDepartment(dbDepartment.get());
 	}

@@ -48,7 +48,17 @@ public class DepartmentController {
 	@PostMapping("/department")
 	public ModelAndView saveDepartment(@ModelAttribute Department department) {
 		Long id = (long) department.getId();
-		service.updateDepartment(id, department);
+		if(id != 0) {
+			service.updateDepartment(id, department);
+		} else {
+			System.out.println("NAME : " + department.getName());
+			if(!department.getName().isEmpty() && !department.getDescription().isEmpty()) {
+				/*Department dpt = new Department();
+				dpt.setName(department.getName());
+				dpt.setDescription(department.getDescription());*/
+				service.createDepartment(department);
+			}
+		}
 		return new ModelAndView("redirect:/departments");
 	}
 	

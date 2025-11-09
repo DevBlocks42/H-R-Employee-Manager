@@ -9,7 +9,10 @@
 		<h1>H&R Association Manager - Services</h1>
 		<p id='title' th:if="${error}" th:text="${error}" style="color: red;"></p>
 		<p id='title' th:if="${message}" th:text="${message}" style="color: green;"></p>
-		<div id = 'departmentsTable'>
+		<div id='addEmployeeContainer'>
+			<a id='addEmployeeButton' th:href="@{/department/add}">Ajouter un département</a>
+		</div>
+		<div id = 'departmentsTable' style="margin-top: 1%;">
 			<table>
 				<thead>
 					<tr>
@@ -27,7 +30,6 @@
 		                	<td class='center'><p th:text="${department.description}"></p></td>
 		                	<td class='center'><a th:href="@{/department/{id}(id=${department.id})}">Éditer</a></td>
 		                	<td class='center'><a th:href="@{/deleteDepartment/{id}(id=${department.id})}">Supprimer</a></td>
-		                	
 		             </tr>
 				</tbody>
 			</table>

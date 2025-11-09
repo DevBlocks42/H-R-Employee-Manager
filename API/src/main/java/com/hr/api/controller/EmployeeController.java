@@ -52,8 +52,13 @@ public class EmployeeController {
      */
     @PostMapping("/employee")
     public Employee addEmployee(@RequestBody Employee employee) {
-    	Department department = departmentService.getDepartment((long) employee.getDepartment().getId()).get();
-    	employee.setDepartment(department);
+    	Department department = null;
+    	if(employee.getDepartment() != null) {
+    		department = departmentService.getDepartment((long) employee.getDepartment().getId()).get();
+    	}
+    	if(department != null) {
+    		employee.setDepartment(department);
+    	}
         return employeeService.saveEmployee(employee);
     }
     

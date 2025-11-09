@@ -8,7 +8,7 @@
 	<body>
 		<h1>H&R Association Manager - Services</h1>
 		<div id = 'formContainer'>
-			<form id='form' th:method='POST' th:action="@{/department/add}" th:object="${department}">
+			<form id='form' th:method='POST' th:action="@{/department}" th:object="${department}">
 				<input type='hidden' th:field="*{id}">
 				<label for='name'>Nom</label>
 				<input id='name' type='text' th:field="*{name}">
