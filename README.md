@@ -48,6 +48,8 @@ Ce projet a pour objectif de faire évoluer l'application existante en lui ajout
 
 # Aperçu de l'application web
 
+Note : le front-end est développé en css pur. 
+
 ## Connexion 
 
 ![alt text](Screens/login.png "Title")
