@@ -53,9 +53,6 @@ public class DepartmentController {
 		} else {
 			System.out.println("NAME : " + department.getName());
 			if(!department.getName().isEmpty() && !department.getDescription().isEmpty()) {
-				/*Department dpt = new Department();
-				dpt.setName(department.getName());
-				dpt.setDescription(department.getDescription());*/
 				service.createDepartment(department);
 			}
 		}

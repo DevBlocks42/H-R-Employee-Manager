@@ -31,9 +31,40 @@ CREATE TABLE employee_department (
    	department_id INT,
    	isLeading BOOLEAN,
    	PRIMARY KEY(employee_id, department_id),
-   	FOREIGN KEY(employee_id) REFERENCES employees(id),
+   	FOREIGN KEY(employee_id) REFERENCES employees(id) ON DELETE CASCADE,
    	FOREIGN KEY(department_id) REFERENCES departments(id)
 );
+
+
+CREATE TABLE db_operations (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	operation VARCHAR(64) NOT NULL,
+	table_name VARCHAR(64) NOT NULL, 
+	datetime TIMESTAMP NOT NULL
+);
+
+/* employees triggers */
+
+CREATE TRIGGER db_update_employees_trigger AFTER UPDATE ON employees
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
+CREATE TRIGGER db_insert_employees_trigger AFTER INSERT ON employees
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
+CREATE TRIGGER db_delete_employees_trigger AFTER DELETE ON employees
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
+/* departments trigger */
+
+CREATE TRIGGER db_update_dpt_trigger AFTER UPDATE ON departments
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
+CREATE TRIGGER db_insert_dpt_trigger AFTER INSERT ON departments
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
+CREATE TRIGGER db_delete_dpt_trigger AFTER DELETE ON departments
+for each row call 'com.hr.api.dbms.TriggerNotifier';
+
 
 INSERT INTO admins (username, password_hash) VALUES
 	('admin', '$2a$10$dpBn4dpJCCluHV6I0k4Yb.PT4zmV1irgvCyjpPhDtWPf/yknwaMju');

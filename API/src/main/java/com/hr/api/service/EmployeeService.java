@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmployeeService {
@@ -37,6 +38,7 @@ public class EmployeeService {
      * Supprimme un employé via son id
      * @param id 
      */
+    @Transactional
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
     }
