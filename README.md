@@ -45,3 +45,22 @@ Ce projet a pour objectif de faire évoluer l'application existante en lui ajout
 # Modèle conceptuel de données
 
 ![alt text](MCD.jpg "Title")
+
+# Aperçu de l'application web
+
+## Connexion 
+
+![alt text](Screens/login.png "Title")
+
+
+## Accueil
+
+![alt text](Screens/dashboard.png "Title")
+
+## Ajout / edition d'employés 
+
+![alt text](Screens/addEmployee.png "Title")
+
+## Gestionnaire de service 
+
+![alt text](Screens/dptManager.png "Title")
