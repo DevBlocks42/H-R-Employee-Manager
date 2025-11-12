@@ -35,6 +35,18 @@ CREATE TABLE employee_department (
    	FOREIGN KEY(department_id) REFERENCES departments(id)
 );
 
+CREATE TABLE admin_logs (
+	id INT AUTO_INCREMENT,
+	admin_id INT,
+   	admin_action VARCHAR(64),
+   	dateTime TIMESTAMP,
+   	ip VARCHAR(255),
+   	userAgent VARCHAR(255),
+   	data VARCHAR(255),
+   	PRIMARY KEY(id, admin_id),
+   	FOREIGN KEY(admin_id) REFERENCES admins(id)
+);
+
 
 CREATE TABLE db_operations (
 	id INT PRIMARY KEY AUTO_INCREMENT,
