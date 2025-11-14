@@ -40,4 +40,8 @@ public class Employee {
     					@JoinColumn(name = "employee_id", referencedColumnName = "id")
     		})
     private Department department;
+    
+    public String toString() {
+    	return "id: " + id + "; firstName: " + firstName + "; lastName: " + lastName + "; mail: " + mail + ";";
+    }
 }

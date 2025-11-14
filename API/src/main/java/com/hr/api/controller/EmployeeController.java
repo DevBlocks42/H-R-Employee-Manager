@@ -2,8 +2,22 @@ package com.hr.api.controller;
 
 import com.hr.api.model.Department;
 import com.hr.api.model.Employee;
+import com.hr.api.model.Admin;
+import com.hr.api.model.AdminLogs;
+import com.hr.api.service.AdminDetailsService;
+import com.hr.api.service.AdminLogsService;
 import com.hr.api.service.DepartmentService;
 import com.hr.api.service.EmployeeService;
+import com.hr.api.utils.AdminLogsUtils;
+
+import jakarta.persistence.EntityManager;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+import java.security.Principal;
+import java.security.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,23 +37,34 @@ public class EmployeeController {
     @Autowired 
     private DepartmentService departmentService;
     
+    @Autowired
+    private AdminDetailsService adminService;
+    
+    @Autowired 
+    private AdminLogsService logsService;
+   
+    
     /******************************** HTTP GET ********************************/
     
     /**
      * Renvoie la liste des employés
      * @return list d'Employees
+     * @throws IOException 
      */
     @GetMapping("/employees")
-    public Iterable<Employee> getEmployees() {
+    public Iterable<Employee> getEmployees(Principal principal, HttpServletRequest http) throws IOException {
+    	AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("GET", adminService, http, null));
         return employeeService.getEmployees();
     }
     /**
      * Renvoie un Employee
      * @param id
      * @return objet Employee
+     * @throws IOException 
      */
     @GetMapping("/employee/{id}")
-    public Optional<Employee> getEmployee(@PathVariable("id") Long id) {
+    public Optional<Employee> getEmployee(@PathVariable("id") Long id, HttpServletRequest http) throws IOException {
+    	AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("GET", adminService, http, null));
         return employeeService.getEmployee(id);
     } 
     
@@ -49,9 +74,10 @@ public class EmployeeController {
      * Ajoute un employé par référence
      * @param employee
      * @return L'Employee ajouté
+     * @throws IOException 
      */
     @PostMapping("/employee")
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody Employee employee, HttpServletRequest http) throws IOException {
     	Department department = null;
     	if(employee.getDepartment() != null) {
     		department = departmentService.getDepartment((long) employee.getDepartment().getId()).get();
@@ -59,6 +85,7 @@ public class EmployeeController {
     	if(department != null) {
     		employee.setDepartment(department);
     	}
+    	AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("POST", adminService, http, employee));
         return employeeService.saveEmployee(employee);
     }
     
@@ -69,9 +96,10 @@ public class EmployeeController {
      * @param id
      * @param employee
      * @return Le nouvel objet Employee 
+     * @throws IOException 
      */
     @PutMapping("/employee/{id}")
-    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
+    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee, HttpServletRequest http) throws IOException {
         Optional<Employee> retrievedEmployee = employeeService.getEmployee(id);
         if(retrievedEmployee.isPresent()) {
             Employee currentEmployee = retrievedEmployee.get();
@@ -92,6 +120,7 @@ public class EmployeeController {
             	currentEmployee.setDepartment(department);
             }
             employeeService.saveEmployee(currentEmployee);
+            AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("PUT", adminService, http, currentEmployee));
             return currentEmployee;
         } else {
             return null;
@@ -103,9 +132,11 @@ public class EmployeeController {
     /**
      * Supprime un employé
      * @param id de l'employé à supprimer
+     * @throws IOException 
      */
     @DeleteMapping("/employee/{id}")
-    public void deleteEmployee(@PathVariable("id") Long id) {
+    public void deleteEmployee(@PathVariable("id") Long id, HttpServletRequest http) throws IOException {
         employeeService.deleteEmployee(id);
+        AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("DELETE", adminService, http, id));
     }
 }

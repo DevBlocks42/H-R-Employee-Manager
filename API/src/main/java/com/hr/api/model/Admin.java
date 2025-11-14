@@ -25,5 +25,5 @@ public class Admin  {
 	
 	@Column(name = "password_hash")
 	private String password;
-
+	
 }

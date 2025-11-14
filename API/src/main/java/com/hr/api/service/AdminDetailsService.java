@@ -33,5 +33,9 @@ public class AdminDetailsService implements UserDetailsService {
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
 		return authorities;
 	}
+	
+	public Optional<Admin> getAdminByUsername(String username) {
+		return repository.findByUsername(username);
+	}
 
 }

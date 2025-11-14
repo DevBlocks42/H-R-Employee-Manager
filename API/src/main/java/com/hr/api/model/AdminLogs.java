@@ -1,5 +1,6 @@
 package com.hr.api.model;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -25,15 +26,11 @@ public class AdminLogs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	@JoinTable(name="admins",
-			joinColumns = {
-					@JoinColumn(referencedColumnName="id")
-			})
+	@JoinColumn(name="admin_id", referencedColumnName="id", nullable=false, insertable=true)
 	private Admin admin;
-	private String ip;
-	private String userAgent;
 	@Column(name="admin_action")
 	private String action;
-	private LocalDateTime dateTime;
+	@Column(name="datetime")
+	private Instant dateTime;
 	private String data;
 }

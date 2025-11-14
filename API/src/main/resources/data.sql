@@ -36,14 +36,12 @@ CREATE TABLE employee_department (
 );
 
 CREATE TABLE admin_logs (
-	id INT AUTO_INCREMENT,
-	admin_id INT,
+	id INT AUTO_INCREMENT NOT NULL,
+	admin_id INT NOT NULL,
    	admin_action VARCHAR(64),
    	dateTime TIMESTAMP,
-   	ip VARCHAR(255),
-   	userAgent VARCHAR(255),
    	data VARCHAR(255),
-   	PRIMARY KEY(id, admin_id),
+   	PRIMARY KEY(id),
    	FOREIGN KEY(admin_id) REFERENCES admins(id)
 );
 
