@@ -121,3 +121,6 @@ h1 {
 	text-align: center;
 	margin-top: 1%;
 }
+.frame {
+	border: 3px;
+}

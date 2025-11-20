@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+		<title>H&R Association Manager</title>
+	</head>
+	<body>
+		<h1>H&R Association Manager - Logs</h1>
+		<div id="employeeManager">
+			<table>
+				<thead>
+					<th>Pseudo</th>
+					<th>Action</th>
+					<th>Date</th>
+					<th>Détails</th>
+				</thead>
+				<tbody>
+					<tr th:each="log: ${logs}">
+			        	<td><p th:text="${log.admin.username}"></p></td>
+			            <td><p th:text="${log.action}"></p></td>
+			            <td><p th:text="${log.dateTime}"></p></td>
+			            <td><a th:href="@{/logs/{id}(id=${log.id})}">Détails</a></td>
+			        </tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
