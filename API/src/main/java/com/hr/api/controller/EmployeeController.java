@@ -51,10 +51,13 @@ public class EmployeeController {
      * @return list d'Employees
      * @throws IOException 
      */
-    @GetMapping("/employees")
-    public Iterable<Employee> getEmployees(Principal principal, HttpServletRequest http) throws IOException {
+    @GetMapping(value={"/employees", "/employees/{column}/{order}"})
+    public Iterable<Employee> getEmployees(Principal principal, HttpServletRequest http, @PathVariable(required=false) String column, @PathVariable(required=false) String order) throws IOException {
     	AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("GET", adminService, http, null));
-        return employeeService.getEmployees();
+        if(column != null && order != null) {
+        	return employeeService.getEmployees(column, order);
+        }
+    	return employeeService.getEmployees();
     }
     /**
      * Renvoie un Employee

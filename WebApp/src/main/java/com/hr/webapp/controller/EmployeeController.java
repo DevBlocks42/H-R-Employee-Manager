@@ -34,10 +34,13 @@ public class EmployeeController {
 	 * @return String vue
 	 */
 	
-	@GetMapping("/")
-	public String home(Model model) {
-		Iterable<Employee> employees = employeeService.getEmployees();
+	//@GetMapping(value = {"/{column}/{order}"})
+	@GetMapping(value = {"/", "/employees/{column}/{order}"})
+	public String home(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order) {
+		Iterable<Employee> employees = employeeService.getEmployees(column, order);
 		model.addAttribute("employees", employees);
+		model.addAttribute("currentColumn", column);
+		model.addAttribute("currentOrder", order);
 		return "home";
 	}
 	

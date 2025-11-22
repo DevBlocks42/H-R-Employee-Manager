@@ -18,8 +18,12 @@ public class EmployeeService {
 	 * Récupère la liste des Employee
 	 * @return une liste d'Empoyee
 	 */
+	public List<Employee> getEmployees(String column, String order) {
+		return repository.getEmployees(column, order);
+	}
+	
 	public List<Employee> getEmployees() {
-		return repository.getEmployees();
+		return repository.getEmployees(null, null);
 	}
 	
 	/**

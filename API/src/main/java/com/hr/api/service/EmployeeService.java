@@ -2,8 +2,12 @@ package com.hr.api.service;
 
 import com.hr.api.model.Employee;
 import com.hr.api.repository.EmployeeRepository;
+import com.hr.api.utils.SortUtils;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +36,12 @@ public class EmployeeService {
      */
     public Iterable<Employee> getEmployees() {
         return repository.findAll();
+    }
+    
+    public Iterable<Employee> getEmployees(String column, String order) {
+    	System.out.println("******DEBUG column : " + column + " order : " + order);
+    	Sort sort = SortUtils.prepareSort(column, order);
+		return repository.findAll(sort);
     }
     
     /**

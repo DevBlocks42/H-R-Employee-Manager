@@ -7,16 +7,43 @@
 	</head>
 	<body>
 		<h1>H&R Association Manager</h1>
-		<img id='logo' th:src="@{images/logo.png}">
+		<img id='logo' th:src="@{/images/logo.png}">
 		<h2 id='title'>Liste des employés</h2>
 		<p id='title' th:if="${message}" th:text="${message}" style="color: green;"></p>
 		<div id = 'employeeManager'>
 			<table>
 				<thead>
 					<tr>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>Service</th>
+						<th>
+						    <a 
+						       th:href="@{/employees/{column}/{order}(column='firstName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'firstName'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        Prénom
+						    </a>
+						</th>
+						<th>
+						    <a 
+						       th:href="@{/employees/{column}/{order}(column='lastName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'lastName'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        NOM
+						    </a>
+						</th>
+						<th>
+						    <a 
+						       th:href="@{/employees/{column}/{order}(column='department.name', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'department.name'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        Service
+						    </a>
+						</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
