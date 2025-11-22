@@ -17,14 +17,16 @@ public class AdminLogsController {
 	@Autowired 
 	private AdminLogsService adminLogsService;
 	
-	@GetMapping("/logs/index")
-	public String logsIndex(Model model) {
-		List<AdminLogs> logs = adminLogsService.getLogs();
+	@GetMapping(value={"/logs/index", "/logs/index/{column}/{order}"})
+	public String logsIndex(Model model, @PathVariable(required = false) String column, @PathVariable(required = false) String order) {
+		List<AdminLogs> logs = adminLogsService.getLogs(column, order);
 		model.addAttribute("logs", logs);
+		model.addAttribute("currentColumn", column);
+		model.addAttribute("currentOrder", order);
 		return "logs/index";
 	}
 	
-	@GetMapping("/logs/{id}")
+	@GetMapping("/log/{id}")
 	public String logsDetails(@PathVariable Long id, Model model) {
 		AdminLogs log = adminLogsService.getLog(id);
 		model.addAttribute("log", log);

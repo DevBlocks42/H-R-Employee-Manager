@@ -10,9 +10,37 @@
 		<div id="employeeManager">
 			<table>
 				<thead>
-					<th>Pseudo</th>
-					<th>Action</th>
-					<th>Date</th>
+					<!--  <th><a th:href="@{/logs/index/admin/{order}(order=${nextOrder})}">Pseudo</a></th>-->
+					<th>
+					    <a 
+					       th:href="@{/logs/index/{column}/{order}(column='admin', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					        <span th:if="${currentColumn == 'admin'}">
+					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+					        </span>
+					        Admin
+					    </a>
+					</th>
+					<th>
+					    <a 
+					       th:href="@{/logs/index/{column}/{order}(column='action', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					        <span th:if="${currentColumn == 'admin_action'}">
+					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+					        </span>
+					        Action
+					    </a>
+					</th>
+					<th>
+					    <a 
+					       th:href="@{/logs/index/{column}/{order}(column='dateTime', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					        <span th:if="${currentColumn == 'dateTime'}">
+					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+					        </span>
+					        Date
+					    </a>
+					</th>
 					<th>Détails</th>
 				</thead>
 				<tbody>
@@ -20,7 +48,7 @@
 			        	<td><p th:text="${log.admin.username}"></p></td>
 			            <td><p th:text="${log.action}"></p></td>
 			            <td><p th:text="${log.dateTime}"></p></td>
-			            <td><a th:href="@{/logs/{id}(id=${log.id})}">Détails</a></td>
+			            <td><a th:href="@{/log/{id}(id=${log.id})}">Détails</a></td>
 			        </tr>
 				</tbody>
 			</table>

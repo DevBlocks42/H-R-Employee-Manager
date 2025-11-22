@@ -18,9 +18,14 @@ public class AdminLogsRepository extends BaseRepository {
 	@Autowired 
 	private PropertiesReader properties;
 	
-	public List<AdminLogs> getLogs() {
+	public List<AdminLogs> getLogs(String column, String order) {
 		String apiUrl = properties.getApiUrl();
-		String endpoint = apiUrl + "/logs/index";
+		String endpoint = "";
+		if(column != null && order != null) {
+			endpoint = apiUrl + "/logs/index/" + column + "/" + order;
+		} else {
+			endpoint = apiUrl + "/logs/index";
+		}
 		ResponseEntity<AdminLogs[]> response = get(endpoint, AdminLogs[].class);
 		return Arrays.asList(response.getBody());
 	}
