@@ -4,6 +4,8 @@ Application de gestion des employés basé sur le cours openclassroom https://op
 
 Dépôt original : https://github.com/OpenClassrooms-Student-Center/HR-Association
 
+CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+
 Note : l'implémentation entre ce projet et celui de base peut différer sur certains points.
 
 ![alt text](logo.png "H&R Association")
