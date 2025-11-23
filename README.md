@@ -66,3 +66,7 @@ Note : le front-end est développé en css pur.
 ## Gestionnaire de service 
 
 ![alt text](Screens/dptManager.png "Title")
+
+## Visionneuse de logs admin  
+
+![alt text](Screens/logs.png "Title")
