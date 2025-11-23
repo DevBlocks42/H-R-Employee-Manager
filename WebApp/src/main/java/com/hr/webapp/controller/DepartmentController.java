@@ -24,10 +24,12 @@ public class DepartmentController {
 	@Autowired 
 	private DepartmentService service;
 	
-	@GetMapping("/departments")
-	public String showDepartments(Model model) {
-		List<Department> departments = service.getDepartments();
+	@GetMapping(value={"/departments", "/departments/{column}/{order}"})
+	public String showDepartments(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order) {
+		List<Department> departments = service.getDepartments(column, order);
 		model.addAttribute("departments", departments);
+		model.addAttribute("currentColumn", column);
+		model.addAttribute("currentOrder", order);
 		return "departments/index";
 	}
 	

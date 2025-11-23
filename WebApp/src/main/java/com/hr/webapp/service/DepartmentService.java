@@ -15,8 +15,8 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentRepository repository;
 	
-	public List<Department> getDepartments() {
-		return repository.getDepartments();
+	public List<Department> getDepartments(String column, String order) {
+		return repository.getDepartments(column, order);
 	}
 	public Department getDepartment(Long id) {
 		return repository.getDepartment(id);

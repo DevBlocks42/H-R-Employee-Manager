@@ -23,9 +23,14 @@ public class DepartmentRepository extends BaseRepository {
 	 * Récupère une liste de tous les Department
 	 * @return
 	 */
-	public List<Department> getDepartments() {
+	public List<Department> getDepartments(String column, String order) {
 		String apiUrl = properties.getApiUrl();
-		String endpoint = apiUrl + "/departments";
+		String endpoint;
+		if(column != null && order != null) {
+			endpoint = apiUrl + "/departments/" + column + "/" + order;
+		} else {
+			endpoint = apiUrl + "/departments";
+		}
 		ResponseEntity<Department[]> response = get(endpoint, Department[].class);
 		return Arrays.asList(response.getBody());
 	}

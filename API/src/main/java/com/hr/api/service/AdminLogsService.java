@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hr.api.model.AdminLogs;
 import com.hr.api.repository.AdminLogsRepository;
+import com.hr.api.utils.SortUtils;
 
 @Service
 public class AdminLogsService {
@@ -37,12 +38,13 @@ public class AdminLogsService {
 		return repository.findAll();
 	}
 	public Iterable<AdminLogs> findAll(String column, String order) {
-		Sort sort = Sort.by(column);
+		/*Sort sort = Sort.by(column);
 		if(order.equals("ASC")) {
 			sort = sort.ascending();
 		} else {
 			sort = sort.descending();
-		}
+		}*/
+		Sort sort = SortUtils.prepareSort(column, order);
 		return repository.findAll(sort);
 	}
 	

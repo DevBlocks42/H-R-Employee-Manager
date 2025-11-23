@@ -3,6 +3,7 @@ package com.hr.api.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hr.api.model.Department;
 import com.hr.api.repository.DepartmentRepository;
 import com.hr.api.repository.EmployeeRepository;
+import com.hr.api.utils.SortUtils;
 
 @Service
 public class DepartmentService {
@@ -27,6 +29,11 @@ public class DepartmentService {
 	 */
 	public Iterable<Department> getDepartments() {
 		return repository.findAll();
+	}
+	
+	public Iterable<Department> getDepartments(String column, String order) {
+		Sort sort = SortUtils.prepareSort(column, order);
+		return repository.findAll(sort);
 	}
 	
 	/**

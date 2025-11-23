@@ -16,9 +16,36 @@
 			<table>
 				<thead>
 					<tr>
-						<th class='center'>ID</th>
-						<th class='center'>Nom</th>
-						<th class='center'>Description</th>
+						<th>
+							<a 
+						       class='center' th:href="@{/departments/{column}/{order}(column='id', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'id'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        ID
+						    </a>
+						</th>
+						<th>
+							<a 
+						       class='center' th:href="@{/departments/{column}/{order}(column='name', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'name'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        Nom
+						    </a>
+						</th>
+						<th>
+							<a 
+						       class='center' th:href="@{/departments/{column}/{order}(column='description', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						        <span th:if="${currentColumn == 'description'}">
+						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
+						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
+						        </span>
+						        Description
+						    </a>
+						</th>
 						<th class='center'>Actions</th>
 					</tr>
 				</thead>
