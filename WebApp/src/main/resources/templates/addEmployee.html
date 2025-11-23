@@ -6,6 +6,7 @@
 		<title>H&R Association Manager</title>
 	</head>
 	<body>
+		<a id="addEmployeeButton" th:href="@{/}">Retour</a>
 		<h2 id='title'>Ajout d'employé</h2>
 		<div id="employeeCreator">
 			<form id='employeeCreatorForm' th:method='POST' th:action="@{/saveEmployee}" th:object="${employee}">

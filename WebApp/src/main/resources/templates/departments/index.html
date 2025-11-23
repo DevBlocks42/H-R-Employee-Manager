@@ -9,6 +9,7 @@
 		<h1>H&R Association Manager - Services</h1>
 		<p id='title' th:if="${error}" th:text="${error}" style="color: red;"></p>
 		<p id='title' th:if="${message}" th:text="${message}" style="color: green;"></p>
+		<a id="addEmployeeButton" th:href="@{/}">Retour</a>
 		<div id='addEmployeeContainer'>
 			<a id='addEmployeeButton' th:href="@{/department/add}">Ajouter un service</a>
 		</div>
