@@ -3,6 +3,9 @@ package com.hr.api.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ public class AdminLogsService {
 	
 	@Autowired
 	private AdminLogsRepository repository;
+	
 	
 	/**
 	 * Sauvegarde une instance d'AdminLogs 
@@ -37,15 +41,10 @@ public class AdminLogsService {
 	public Iterable<AdminLogs> findAll() {
 		return repository.findAll();
 	}
-	public Iterable<AdminLogs> findAll(String column, String order) {
-		/*Sort sort = Sort.by(column);
-		if(order.equals("ASC")) {
-			sort = sort.ascending();
-		} else {
-			sort = sort.descending();
-		}*/
+	public Page<AdminLogs> findAll(String column, String order, String page) {
 		Sort sort = SortUtils.prepareSort(column, order);
-		return repository.findAll(sort);
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5, sort);
+		return repository.findAll(pageable);
 	}
 	
 	/**

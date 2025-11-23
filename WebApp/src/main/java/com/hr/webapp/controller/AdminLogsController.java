@@ -17,9 +17,9 @@ public class AdminLogsController {
 	@Autowired 
 	private AdminLogsService adminLogsService;
 	
-	@GetMapping(value={"/logs/index", "/logs/index/{column}/{order}"})
-	public String logsIndex(Model model, @PathVariable(required = false) String column, @PathVariable(required = false) String order) {
-		List<AdminLogs> logs = adminLogsService.getLogs(column, order);
+	@GetMapping(value={"/logs/index", "/logs/index/{column}/{order}/{page}"})
+	public String logsIndex(Model model, @PathVariable(required = false) String column, @PathVariable(required = false) String order, @PathVariable(required = false) String page) {
+		List<AdminLogs> logs = adminLogsService.getLogs(column, order, page);
 		model.addAttribute("logs", logs);
 		model.addAttribute("currentColumn", column);
 		model.addAttribute("currentOrder", order);

@@ -3,12 +3,15 @@ package com.hr.webapp.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import com.hr.webapp.model.AdminLogs;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -44,6 +47,12 @@ public abstract class BaseRepository {
 		HttpHeaders headers = createLoggedRequestHeaders();
 		HttpEntity<Void> entity = new HttpEntity<>(headers);
 		return restTemplate.exchange(endpoint, HttpMethod.GET, entity, responseType);
+	}
+	
+	protected <T> ResponseEntity<T> get(String endpoint, ParameterizedTypeReference<T> responseType) {
+	    HttpHeaders headers = createLoggedRequestHeaders();
+	    HttpEntity<Void> entity = new HttpEntity<>(headers);
+	    return restTemplate.exchange(endpoint, HttpMethod.GET, entity, responseType);
 	}
 	
 	/**

@@ -14,8 +14,8 @@ public class AdminLogsService {
 	@Autowired 
 	private AdminLogsRepository repository;
 	
-	public List<AdminLogs> getLogs(String column, String order) {
-		return repository.getLogs(column, order);
+	public List<AdminLogs> getLogs(String column, String order, String page) {
+		return repository.getLogs(column, order, page);
 	}
 	
 	public AdminLogs getLog(Long id) {
