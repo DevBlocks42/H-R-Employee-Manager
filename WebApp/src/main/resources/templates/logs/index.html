@@ -14,7 +14,7 @@
 					<!--  <th><a th:href="@{/logs/index/admin/{order}(order=${nextOrder})}">Pseudo</a></th>-->
 					<th>
 					    <a 
-					       th:href="@{/logs/index/{column}/{order}(column='admin', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					       th:href="@{/logs/index/{column}/{order}/{page}(column='admin', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'}, page=0)}">
 					        <span th:if="${currentColumn == 'admin'}">
 					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -24,7 +24,7 @@
 					</th>
 					<th>
 					    <a 
-					       th:href="@{/logs/index/{column}/{order}(column='action', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					       th:href="@{/logs/index/{column}/{order}/{page}(column='action', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'}, page=0)}">
 					        <span th:if="${currentColumn == 'admin_action'}">
 					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -34,7 +34,7 @@
 					</th>
 					<th>
 					    <a 
-					       th:href="@{/logs/index/{column}/{order}(column='dateTime', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+					       th:href="@{/logs/index/{column}/{order}/{page}(column='dateTime', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'}, page=0)}">
 					        <span th:if="${currentColumn == 'dateTime'}">
 					            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 					            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -53,6 +53,16 @@
 			        </tr>
 				</tbody>
 			</table>
+			<div class='pagination'>
+				<span th:if="${column != null && order != null}">
+					<a th:href = "@{/logs/index/{column}/{order}/{page}(page=${previousPage}, column=${currentColumn}, order=${currentOrder})}">Précédent</a>
+					<a th:href = "@{/logs/index/{column}/{order}/{page}(page=${nextPage}, column=${currentColumn}, order=${currentOrder})}">Suivant</a>
+				</span>
+				<span th:if="${column == null || order == null}">
+					<a th:href = "@{/logs/index/{page}(page=${previousPage})}">Précédent</a>
+					<a th:href = "@{/logs/index/{page}(page=${nextPage})}">Suivant</a>
+				</span>
+			</div>
 		</div>
 	</body>
 </html>

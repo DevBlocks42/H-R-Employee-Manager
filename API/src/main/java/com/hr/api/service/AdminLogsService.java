@@ -41,6 +41,12 @@ public class AdminLogsService {
 	public Iterable<AdminLogs> findAll() {
 		return repository.findAll();
 	}
+	
+	public Page<AdminLogs> findAll(String page) {
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5);
+		return repository.findAll(pageable);
+	}
+	
 	public Page<AdminLogs> findAll(String column, String order, String page) {
 		Sort sort = SortUtils.prepareSort(column, order);
 		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5, sort);

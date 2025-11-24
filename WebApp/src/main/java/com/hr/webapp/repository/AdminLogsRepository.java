@@ -24,8 +24,10 @@ public class AdminLogsRepository extends BaseRepository {
 		String endpoint = "";
 		if(column != null && order != null && page != null) {
 			endpoint = apiUrl + "/logs/index/" + column + "/" + order + "/" + page;
+		} else if(page != null){
+			endpoint = apiUrl + "/logs/index/" + page;
 		} else {
-			endpoint = apiUrl + "/logs/index/id/ASC/0";
+			endpoint = apiUrl + "/logs/index/0";
 		}
 		ResponseEntity<AdminLogs[]> response = get(endpoint, AdminLogs[].class);
 		return Arrays.asList(response.getBody());

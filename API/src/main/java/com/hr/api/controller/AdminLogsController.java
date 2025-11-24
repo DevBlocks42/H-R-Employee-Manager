@@ -18,12 +18,12 @@ public class AdminLogsController {
 	@Autowired
 	private AdminLogsService logsService;
 	
-	@GetMapping(value={"/logs/index", "/logs/index/{column}/{order}/{page}"})
+	@GetMapping(value={"/logs/index/{page}", "/logs/index/{column}/{order}/{page}"})
 	public Iterable<AdminLogs> showLogs(@PathVariable(required = false) String column, @PathVariable(required = false) String order, @PathVariable(required=false) String page) {
 		if(column != null && order != null && page != null) {
 			return logsService.findAll(column, order, page).getContent();
 		} 
-		return logsService.findAll();
+		return logsService.findAll(page).getContent();
 	}
 	
 	@GetMapping("/logs/details/{id}")
