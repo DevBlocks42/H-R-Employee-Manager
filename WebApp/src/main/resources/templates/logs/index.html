@@ -53,7 +53,7 @@
 			        </tr>
 				</tbody>
 			</table>
-			<div class='pagination'>
+			<div class='center'>
 				<span th:if="${column != null && order != null}">
 					<a th:href = "@{/logs/index/{column}/{order}/{page}(page=${previousPage}, column=${currentColumn}, order=${currentOrder})}">Précédent</a>
 					<a th:href = "@{/logs/index/{column}/{order}/{page}(page=${nextPage}, column=${currentColumn}, order=${currentOrder})}">Suivant</a>

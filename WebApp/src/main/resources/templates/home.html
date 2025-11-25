@@ -16,7 +16,7 @@
 					<tr>
 						<th>
 						    <a 
-						       th:href="@{/employees/{column}/{order}(column='firstName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						       th:href="@{/employees/{column}/{order}/{page}(page=0, column='firstName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
 						        <span th:if="${currentColumn == 'firstName'}">
 						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -26,7 +26,7 @@
 						</th>
 						<th>
 						    <a 
-						       th:href="@{/employees/{column}/{order}(column='lastName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						       th:href="@{/employees/{column}/{order}/{page}(page=0, column='lastName', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
 						        <span th:if="${currentColumn == 'lastName'}">
 						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -36,7 +36,7 @@
 						</th>
 						<th>
 						    <a 
-						       th:href="@{/employees/{column}/{order}(column='department.name', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
+						       th:href="@{/employees/{column}/{order}/{page}(page=0, column='department.name', order=${currentOrder == 'ASC' ? 'DESC' : 'ASC'})}">
 						        <span th:if="${currentColumn == 'department.name'}">
 						            <span th:if="${currentOrder == 'ASC'}"> &darr; </span>
 						            <span th:if="${currentOrder == 'DESC'}"> &uarr; </span>
@@ -58,6 +58,16 @@
 	                </tr>
 				</tbody>
 			</table>
+			<div class='center'>
+				<span th:if="${column != null && order != null}">
+					<a th:href = "@{/employees/{column}/{order}/{page}(page=${previousPage}, column=${currentColumn}, order=${currentOrder})}">Précédent</a>
+					<a th:href = "@{/employees/{column}/{order}/{page}(page=${nextPage}, column=${currentColumn}, order=${currentOrder})}">Suivant</a>
+				</span>
+				<span th:if="${column == null || order == null}">
+					<a th:href = "@{/{page}(page=${previousPage})}">Précédent</a>
+					<a th:href = "@{/{page}(page=${nextPage})}">Suivant</a>
+				</span>
+			</div>
 			<div id='addEmployeeContainer'>
 				<a id='addEmployeeButton' th:href="@{/addEmployee}">Ajouter un employé</a>
 				<a id='addEmployeeButton' th:href="@{/departments}">Gestionnaire de Services</a>

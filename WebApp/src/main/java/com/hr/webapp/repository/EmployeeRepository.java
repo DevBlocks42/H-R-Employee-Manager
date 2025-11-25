@@ -27,17 +27,26 @@ public class EmployeeRepository extends BaseRepository {
 	 * Retourne la liste de tous les Employee
 	 * @return une liste d'objet Employee
 	 */
-	public List<Employee> getEmployees(String column, String order) {
+	public List<Employee> getEmployees(String column, String order, String page) {
 		String apiUrl = props.getApiUrl();
 		String endpoint = "";
-		if(column != null && order != null) {
-			endpoint = apiUrl + "/employees/" + column + "/" + order;
+		if(column != null && order != null && page != null) {
+			endpoint = apiUrl + "/employees/" + column + "/" + order + "/" + page;
+		} else if(page != null) {
+			endpoint = apiUrl + "/employees/" + page;
 		} else {
-			endpoint = apiUrl + "/employees";
+			endpoint = apiUrl + "/employees/0";
 		}
 		ResponseEntity<Employee[]> response = get(endpoint, Employee[].class);
 		return Arrays.asList(response.getBody());
 		
+	}
+	
+	public List<Employee> getEmployees() {
+		String apiUrl = props.getApiUrl();
+		String endpoint = apiUrl + "/employees";
+		ResponseEntity<Employee[]> response = get(endpoint, Employee[].class);
+		return Arrays.asList(response.getBody());
 	}
 	/**
 	 * Retourne un Employee via son id

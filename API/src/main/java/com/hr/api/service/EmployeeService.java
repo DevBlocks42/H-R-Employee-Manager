@@ -4,11 +4,12 @@ import com.hr.api.model.Employee;
 import com.hr.api.repository.EmployeeRepository;
 import com.hr.api.utils.SortUtils;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,14 +35,19 @@ public class EmployeeService {
      * Récupère la liste des employés
      * @return Liste d'Employees
      */
+    public Page<Employee> getEmployees(String page) {
+    	Pageable pageable = PageRequest.of(Integer.parseInt(page), 5);
+        return repository.findAll(pageable);
+    }
+    
     public Iterable<Employee> getEmployees() {
         return repository.findAll();
     }
     
-    public Iterable<Employee> getEmployees(String column, String order) {
-    	System.out.println("******DEBUG column : " + column + " order : " + order);
+    public Page<Employee> getEmployees(String column, String order, String page) {
     	Sort sort = SortUtils.prepareSort(column, order);
-		return repository.findAll(sort);
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5, sort);
+		return repository.findAll(pageable);
     }
     
     /**

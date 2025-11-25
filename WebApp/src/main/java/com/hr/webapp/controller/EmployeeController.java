@@ -35,12 +35,27 @@ public class EmployeeController {
 	 */
 	
 	//@GetMapping(value = {"/{column}/{order}"})
-	@GetMapping(value = {"/", "/employees/{column}/{order}"})
-	public String home(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order) {
-		Iterable<Employee> employees = employeeService.getEmployees(column, order);
+	@GetMapping(value = {"/", "/{page}", "/employees/{column}/{order}/{page}"})
+	public String home(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order, @PathVariable(required=false) String page) {
+		Iterable<Employee> employees;
+		Integer intPage;
+		if(column != null && order != null && page != null ) {
+			employees = employeeService.getEmployees(column, order, page);
+			intPage = Integer.parseInt(page);
+		} else if (page != null) {
+			employees = employeeService.getEmployees(null, null, page);
+			intPage = Integer.parseInt(page);
+		} else {
+			page = "0";
+			employees = employeeService.getEmployees(null, null, page);
+			intPage = 0;
+		}
 		model.addAttribute("employees", employees);
 		model.addAttribute("currentColumn", column);
 		model.addAttribute("currentOrder", order);
+		model.addAttribute("currentPage", intPage);
+		model.addAttribute("previousPage", intPage - 1 == - 1 ? 0 : intPage - 1);
+		model.addAttribute("nextPage", intPage + 1);
 		return "home";
 	}
 	

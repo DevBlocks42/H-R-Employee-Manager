@@ -36,7 +36,10 @@ public class AuthenticationController {
 	public String forwardLogin(@ModelAttribute("admin") Admin admin, Model model, HttpSession session) {
 		boolean loginState = adminService.login(admin, session);
 		if(loginState) {
-			List<Employee> employees = employeeService.getEmployees();
+			List<Employee> employees = employeeService.getEmployees(null, null, "0");
+			model.addAttribute("currentPage", "0");
+			model.addAttribute("previousPage", "0");
+			model.addAttribute("nextPage", "1");
 			model.addAttribute("message", "Authentification réussie " + admin.getUsername());
 			model.addAttribute("employees", employees);
 			return "home";
