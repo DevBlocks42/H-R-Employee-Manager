@@ -2,6 +2,8 @@ package com.hr.api.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,5 +14,5 @@ import com.hr.api.model.Department;
 
 @Repository
 public interface DepartmentRepository extends CrudRepository<Department, Long>, PagingAndSortingRepository<Department, Long>{
-	List<Department> findAll(Sort sort);
+	Page<Department> findAll(Pageable pageable);
 }

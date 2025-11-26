@@ -3,6 +3,9 @@ package com.hr.api.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +34,15 @@ public class DepartmentService {
 		return repository.findAll();
 	}
 	
-	public Iterable<Department> getDepartments(String column, String order) {
+	public Page<Department> getDepartments(String page) {
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5);
+		return repository.findAll(pageable);
+	}
+	
+	public Page<Department> getDepartments(String column, String order, String page) {
 		Sort sort = SortUtils.prepareSort(column, order);
-		return repository.findAll(sort);
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5, sort);
+		return repository.findAll(pageable);
 	}
 	
 	/**

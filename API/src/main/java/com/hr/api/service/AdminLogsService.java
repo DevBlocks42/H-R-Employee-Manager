@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.hr.api.model.AdminLogs;
 import com.hr.api.repository.AdminLogsRepository;
+import com.hr.api.utils.PropertiesReader;
 import com.hr.api.utils.SortUtils;
 
 @Service
@@ -18,6 +19,9 @@ public class AdminLogsService {
 	
 	@Autowired
 	private AdminLogsRepository repository;
+	
+	@Autowired 
+	private PropertiesReader properties;
 	
 	
 	/**
@@ -43,13 +47,13 @@ public class AdminLogsService {
 	}
 	
 	public Page<AdminLogs> findAll(String page) {
-		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5);
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), properties.getTableSize());
 		return repository.findAll(pageable);
 	}
 	
 	public Page<AdminLogs> findAll(String column, String order, String page) {
 		Sort sort = SortUtils.prepareSort(column, order);
-		Pageable pageable = PageRequest.of(Integer.parseInt(page), 5, sort);
+		Pageable pageable = PageRequest.of(Integer.parseInt(page), properties.getTableSize(), sort);
 		return repository.findAll(pageable);
 	}
 	

@@ -46,14 +46,17 @@ public class DepartmentController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@GetMapping(value= {"/departments", "/departments/{column}/{order}"})
-	public Iterable<Department> showDepartments(Model model, HttpServletRequest http, @PathVariable(required=false) String column, @PathVariable(required=false) String order) throws IOException {
+	@GetMapping(value= {"/departments", "/departments/{page}", "/departments/{column}/{order}/{page}"})
+	public Iterable<Department> showDepartments(Model model, HttpServletRequest http, @PathVariable(required=false) String column, @PathVariable(required=false) String order, @PathVariable(required=false) String page) throws IOException {
 		Iterable<Department> departments; 
-		if(column != null && order != null) {
-			departments = service.getDepartments(column, order);
+		if(column != null && order != null && page != null) {
+			departments = service.getDepartments(column, order, page).getContent();
+		} else if(page != null){
+			departments = service.getDepartments(page).getContent();
 		} else {
 			departments = service.getDepartments();
 		}
+		
 		AdminLogs logs = AdminLogsUtils.saveLogs(logsService, AdminLogsUtils.createLogsObject("GET", adminService, http, null));
 		return departments;
 	}

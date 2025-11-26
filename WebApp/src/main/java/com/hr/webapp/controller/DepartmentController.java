@@ -24,11 +24,24 @@ public class DepartmentController {
 	@Autowired 
 	private DepartmentService service;
 	
-	@GetMapping(value={"/departments", "/departments/{column}/{order}"})
-	public String showDepartments(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order) {
-		List<Department> departments = service.getDepartments(column, order);
+	@GetMapping(value={"/departments", "/departments/{page}", "/departments/{column}/{order}/{page}"})
+	public String showDepartments(Model model, @PathVariable(required=false) String column, @PathVariable(required=false) String order, @PathVariable(required=false) String page) {
+		List<Department> departments;
+		Integer intPage;
+		if(column != null && order != null && page != null) {
+			intPage = Integer.parseInt(page);
+			departments = service.getDepartments(column, order, page);
+		} else if(page != null) {
+			departments = service.getDepartments(page);
+			intPage = Integer.parseInt(page);
+		} else {
+			departments = service.getDepartments();
+			intPage = - 1;
+		}
 		model.addAttribute("departments", departments);
 		model.addAttribute("currentColumn", column);
+		model.addAttribute("previousPage", intPage - 1 == - 1 ? 0 : intPage - 1);
+		model.addAttribute("nextPage", intPage + 1);
 		model.addAttribute("currentOrder", order);
 		return "departments/index";
 	}

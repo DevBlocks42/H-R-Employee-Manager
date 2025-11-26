@@ -67,7 +67,7 @@ public class EmployeeController {
 	@GetMapping("/addEmployee")
 	public String addEmployee(Model model) {
 		Employee employee = new Employee();
-		List<Department> departments = departmentService.getDepartments(null, null);
+		List<Department> departments = departmentService.getDepartments(null, null, null);
 		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departments);
 		return "addEmployee";
@@ -82,7 +82,7 @@ public class EmployeeController {
 	@GetMapping("/editEmployee/{id}")
 	public String editEmployee(Model model, @PathVariable("id") Long id) {
 		Employee employee = employeeService.getEmployee(id);
-		List<Department> departments = departmentService.getDepartments(null, null);
+		List<Department> departments = departmentService.getDepartments(null, null, null);
 		if(employee != null) {
 			model.addAttribute("departments", departments);
 			model.addAttribute("employee", employee);

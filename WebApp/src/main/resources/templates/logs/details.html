@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h1>H&R Association Manager - Logs</h1>
-		<a id="addEmployeeButton" th:href="@{/logs/index}">Retour</a>
+		<a id="addEmployeeButton" th:href="@{/logs/index/0}">Retour</a>
 		<div class='center'>
 			<p th:text="'Action effectuée par ' + ${log.admin.username}"></p>
 			<textarea readonly th:text="${log.data}"></textarea>

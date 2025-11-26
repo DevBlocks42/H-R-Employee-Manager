@@ -23,11 +23,13 @@ public class DepartmentRepository extends BaseRepository {
 	 * Récupère une liste de tous les Department
 	 * @return
 	 */
-	public List<Department> getDepartments(String column, String order) {
+	public List<Department> getDepartments(String column, String order, String page) {
 		String apiUrl = properties.getApiUrl();
 		String endpoint;
-		if(column != null && order != null) {
-			endpoint = apiUrl + "/departments/" + column + "/" + order;
+		if(column != null && order != null && page != null) {
+			endpoint = apiUrl + "/departments/" + column + "/" + order + "/" + page;
+		} else if (page != null) {
+			endpoint = apiUrl + "/departments/" + page;
 		} else {
 			endpoint = apiUrl + "/departments";
 		}
